@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
+const MIN_COUNT = 0;
+const MAX_COUNT = 5;
+
 export function MenuItem({ item }) {
-    const MIN_COUNT = 0;
-    const MAX_COUNT = 5;
     const [counter, setCounter] = useState(MIN_COUNT);
 
     const increment = () => {

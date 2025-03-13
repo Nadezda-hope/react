@@ -1,5 +1,5 @@
-export function Tab({ title, cb }) {
+export function Tab({ title, onClick }) {
     return (
-        <button onClick={cb}>{title}</button>
+        <button onClick={onClick}>{title}</button>
     )
 }
