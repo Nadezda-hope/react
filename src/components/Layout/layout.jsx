@@ -1,12 +1,11 @@
 import { Header } from '../Header/header';
 import { Footer } from '../Footer/footer';
-import { RestaurantsPage } from '../Restaurants-page/restaurants-page';
 
-export function Layout({ restaurants }) {
+export function Layout({ children }) {
     return (
         <div>
             <Header />
-            <RestaurantsPage />
+            {children}
             <Footer />
         </div>
     );

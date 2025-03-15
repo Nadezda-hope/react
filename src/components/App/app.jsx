@@ -1,6 +1,10 @@
 import { Layout } from '../Layout/layout';
-import { restaurants } from '../.././../material/mock';
+import { RestaurantsPage } from '../Restaurants-page/restaurants-page';
 
 export function App() {
-    return <Layout restaurants={restaurants} />;
+    return (
+        <Layout>
+            <RestaurantsPage />
+        </Layout>
+    );
 }

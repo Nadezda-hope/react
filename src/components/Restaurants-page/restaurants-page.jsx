@@ -4,14 +4,14 @@ import { RestaurantCard } from '../Restaurant-card/restaurant-card';
 import { useState } from 'react';
 
 export function RestaurantsPage() {
-    const [activeTabId, setActiveTab] = useState(restaurants[0].id);
+    const [activeTabId, setActiveTabId] = useState(restaurants[0].id);
 
     const onClickHandler = (id) => {
         if (activeTabId === id) {
             return;
         }
 
-        setActiveTab(id);
+        setActiveTabId(id);
     };
 
     const activeRestaurantCard = restaurants.find(

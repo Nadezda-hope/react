@@ -1,4 +1,3 @@
-import { MenuItem } from '../Menu-item/menu-item';
 import { MenuList } from '../Menu-list/menu-list';
 import { ReviewList } from '../Review/review-list';
 
