@@ -1,7 +1,6 @@
 import { useState } from 'react';
-
-const MIN_COUNT = 0;
-const MAX_COUNT = 5;
+import { Counter } from '../Counter/counter';
+import { MIN_COUNT, MAX_COUNT } from '../../constants/constants';
 
 export function MenuItem({ item }) {
     const [counter, setCounter] = useState(MIN_COUNT);
@@ -24,9 +23,9 @@ export function MenuItem({ item }) {
     return (
         <li>
             <h4>{item.name}</h4>
-            <button onClick={decrement}>-</button>
-            <span>{counter}</span>
-            <button onClick={increment}>+</button>
+            <Counter increment={increment} decrement={decrement}>
+                {counter}
+            </Counter>
         </li>
     )
 }
