@@ -1,5 +1,6 @@
 import { MenuList } from '../Menu-list/menu-list';
 import { ReviewList } from '../Review/review-list';
+import { ReviewForm } from '../Review-form/review-form';
 
 export function RestaurantCard({ restaurant }) {
     return (
@@ -21,6 +22,7 @@ export function RestaurantCard({ restaurant }) {
                     </>
                 ) : null
             }
+            <ReviewForm />
         </section>
     );
 }
