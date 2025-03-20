@@ -6,19 +6,24 @@ export function MenuItem({ item }) {
     const [counter, setCounter] = useState(MIN_COUNT);
 
     const increment = useCallback(() => {
-        if (counter === MAX_COUNT) {
-            return;
-        }
+        return setCounter((count) => {
+            if (count === MAX_COUNT) {
+                return count;
+            }
 
-        return setCounter((count) => count + 1);
-    }, [counter]);
+            return count + 1;
+        });
+    }, []);
 
     const decrement = useCallback(() => {
-        if (counter === MIN_COUNT) {
-            return;
-        }
-        return setCounter((count) => count - 1);
-    }, [counter]);
+        return setCounter((count) => {
+            if (count === MIN_COUNT) {
+                return count;
+            }
+
+            return count - 1;
+        });
+    }, []);
 
     return (
         <li>

@@ -3,17 +3,17 @@ import { useRef, useEffect, useState } from 'react';
 export function ProgressBar() {
     const [progressWidth, setProgressWidth] = useState(1);
 
-    const scrollHandler = () => {
-        const viewporhHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight - viewporhHeight;
-        const scrolled = window.scrollY;
-
-        const progress = (scrolled / documentHeight) * 100;
-
-        setProgressWidth(progress);
-    }
-
     useEffect(() => {
+        const scrollHandler = () => {
+            const viewporhHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - viewporhHeight;
+            const scrolled = window.scrollY;
+
+            const progress = (scrolled / documentHeight) * 100;
+
+            setProgressWidth(progress);
+        }
+
         window.addEventListener('scroll', scrollHandler);
 
         return () => window.removeEventListener('scroll', scrollHandler);
@@ -28,6 +28,6 @@ export function ProgressBar() {
             height: '8px',
             background: 'tomato',
             borderRadius: '4px'
-        }}></div>
+        }} />
     )
 }
