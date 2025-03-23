@@ -1,0 +1,27 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 12px;
+    font-size: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &.isLight {
+        color: white;
+        background-color: #f0ad4e;
+    }
+
+    &.isDark {
+        color: tomato;
+        background-color: white;
+    }
+
+    &:hover {
+        background-color: #ffd25d;
+    }
+}
