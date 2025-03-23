@@ -33,6 +33,26 @@ export function RestaurantsPage() {
                 key={activeRestaurantCard.id}
                 restaurant={activeRestaurantCard}
             />
+            <RestaurantCard
+                key={activeRestaurantCard.id + 1}
+                restaurant={activeRestaurantCard}
+            />
+            <RestaurantCard
+                key={activeRestaurantCard.id + 2}
+                restaurant={activeRestaurantCard}
+            />
+            <RestaurantCard
+                key={activeRestaurantCard.id + 3}
+                restaurant={activeRestaurantCard}
+            />
+            <RestaurantCard
+                key={activeRestaurantCard.id + 4}
+                restaurant={activeRestaurantCard}
+            />
+            <RestaurantCard
+                key={activeRestaurantCard.id + 5}
+                restaurant={activeRestaurantCard}
+            />
         </div>
     );
 }

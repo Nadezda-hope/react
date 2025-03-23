@@ -1,24 +1,29 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Counter } from '../Counter/counter';
 import { MIN_COUNT, MAX_COUNT } from '../../constants/constants';
 
 export function MenuItem({ item }) {
     const [counter, setCounter] = useState(MIN_COUNT);
 
-    const increment = () => {
-        if (counter === MAX_COUNT) {
-            return;
-        }
+    const increment = useCallback(() => {
+        return setCounter((count) => {
+            if (count === MAX_COUNT) {
+                return count;
+            }
 
-        return setCounter(counter + 1);
-    };
+            return count + 1;
+        });
+    }, []);
 
-    const decrement = () => {
-        if (counter === MIN_COUNT) {
-            return;
-        }
-        return setCounter(counter - 1);
-    };
+    const decrement = useCallback(() => {
+        return setCounter((count) => {
+            if (count === MIN_COUNT) {
+                return count;
+            }
+
+            return count - 1;
+        });
+    }, []);
 
     return (
         <li>
