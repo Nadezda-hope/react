@@ -1,0 +1,24 @@
+.restaurantsPage {
+    &__tabs {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        min-height: 48px;
+        padding: 0 24px;
+        background-color: #E5E5E5;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 60%;
+        margin: 0 auto;
+        padding-top: 48px;
+    }
+
+    &.isDark {
+        background-color: #1D1D1D;
+        color: white;
+    }
+}

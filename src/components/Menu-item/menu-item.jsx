@@ -1,9 +1,12 @@
-import { useCallback, useState } from 'react';
+import { use, useCallback, useState } from 'react';
 import { Counter } from '../Counter/counter';
 import { MIN_COUNT, MAX_COUNT } from '../../constants/constants';
+import styles from './menu-item.module.scss';
+import { UserContext } from '../User-context';
 
 export function MenuItem({ item }) {
     const [counter, setCounter] = useState(MIN_COUNT);
+    const { user } = use(UserContext);
 
     const increment = useCallback(() => {
         return setCounter((count) => {
@@ -26,11 +29,15 @@ export function MenuItem({ item }) {
     }, []);
 
     return (
-        <li>
-            <h4>{item.name}</h4>
-            <Counter increment={increment} decrement={decrement}>
-                {counter}
-            </Counter>
+        <li className={styles.menuItem}>
+            <h4 className={styles.menuItem__name}>{item.name}</h4>
+            {
+                user && (
+                    <Counter className={styles.menuItem__counter} increment={increment} decrement={decrement}>
+                        {counter}
+                    </Counter>
+                )
+            }
         </li>
     )
 }

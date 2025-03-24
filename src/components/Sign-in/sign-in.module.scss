@@ -1,0 +1,25 @@
+.signIn {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: 16px;
+    margin-left: 16px;
+
+    &__user {
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+
+    &__avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+        border-radius: 50%;
+        background-color: #ccc;
+        border: 1px solid #949494;
+    }
+}

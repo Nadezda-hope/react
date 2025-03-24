@@ -1,9 +1,16 @@
+import { Button } from '../Button/button';
+import styles from './counter.module.scss';
+
 export function Counter({ children, decrement, increment }) {
     return (
-        <>
-            <button onClick={decrement} type='button'>-</button>
-            <span>{children}</span>
-            <button onClick={increment} type='button'>+</button>
-        </>
+        <div className={styles.counter}>
+            <span className={styles.counter__content}>{children}</span>
+            <Button onClickHandler={decrement}>
+                -
+            </Button>
+            <Button onClickHandler={increment}>
+                +
+            </Button>
+        </div>
     );
 }

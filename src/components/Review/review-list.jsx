@@ -3,7 +3,7 @@ export function ReviewList({ reviews }) {
         <ul>
             {
                 reviews.map((review) => (
-                    <li key={review.text}>{review.text}</li>
+                    <li key={review.text}><i>{review.text}</i></li>
                 ))
             }
         </ul>

@@ -1,0 +1,21 @@
+.tab {
+    position: relative;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    &.isActive {
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #1d1d1d;
+        }
+    }
+}
