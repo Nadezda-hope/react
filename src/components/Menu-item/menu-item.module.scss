@@ -1,11 +1,11 @@
 .menuItem {
-    margin-bottom: 24px;
+    display: block;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    cursor: pointer;
 
-    &__name {
-        margin-bottom: 8px;
-    }
-
-    &__price {
-        color: #f0ad4e;
+    &:visited {
+        color: #000;
     }
 }

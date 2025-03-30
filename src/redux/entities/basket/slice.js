@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 export const basketSlice = createSlice({
     name: 'basket',
@@ -20,14 +20,16 @@ export const basketSlice = createSlice({
         },
     },
     selectors: {
-        selectDishItems: (state) => Object.keys(state).reduce((acc, id) => {
-            acc.push({ id, amount: state[id] });
-
-            return acc;
-        }, []),
         selectCountByDishId: (state, id) => state[id],
     }
 });
 
-export const { selectDishItems, selectCountByDishId } = basketSlice.selectors;
+export const { selectCountByDishId } = basketSlice.selectors;
 export const { addToBasket, removeFromBasket } = basketSlice.actions;
+const selectBasketSlice = (state) => state.basket;
+
+export const selectDishItems = createSelector([selectBasketSlice], (basket) => Object.keys(basket).reduce((acc, id) => {
+    acc.push({ id, amount: basket[id] });
+
+    return acc;
+}, []));

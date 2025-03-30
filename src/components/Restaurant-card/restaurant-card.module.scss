@@ -1,8 +1,5 @@
 .restaurantCard {
     width: 100%;
-    padding: 20px;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
 
     &__title {
         margin-bottom: 16px;
@@ -18,14 +15,15 @@
 
     &__block {
         flex: 1;
-        padding-left: 24px;
+    }
+
+    &__tabs {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 32px;
     }
 
     &__wrap {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-
         &.withForm {
             margin-bottom: 24px;
         }

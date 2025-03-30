@@ -27,7 +27,8 @@ export function ProgressBar() {
             width: `${progressWidth}%`,
             height: '8px',
             background: 'tomato',
-            borderRadius: '4px'
+            borderRadius: '4px',
+            zIndex: 1
         }} />
     )
 }

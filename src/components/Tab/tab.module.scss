@@ -1,10 +1,13 @@
 .tab {
     position: relative;
+    display: inline-flex;
+    align-items: center;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     background: transparent;
     border: none;
     padding: 0;
+    color: #000;
     cursor: pointer;
 
     &.isActive {

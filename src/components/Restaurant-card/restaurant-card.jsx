@@ -1,11 +1,12 @@
+import classNames from 'classnames';
 import { use } from 'react';
 import { MenuList } from '../Menu-list/menu-list';
-import { ReviewList } from '../Review-list/review-list';
 import { ReviewForm } from '../Review-form/review-form';
-import styles from './restaurant-card.module.scss';
+import { ReviewList } from '../Review-list/review-list';
 import { UserContext } from '../User-context';
-import classNames from 'classnames';
-import { Basket } from '../Basket/basket';
+import styles from './restaurant-card.module.scss';
+import { Tab } from '../Tab/tab';
+import { Outlet } from 'react-router';
 
 export function RestaurantCard({ name, menuIds, reviewsIds }) {
     const { user } = use(UserContext);
@@ -16,36 +17,18 @@ export function RestaurantCard({ name, menuIds, reviewsIds }) {
             <div className={classNames(styles.restaurantCard__wrap, {
                 [styles.withForm]: user
             })}>
-                <div className={styles.restaurantCard__container}>
-                    <div className={styles.restaurantCard__block}>
-                        {
-                            menuIds.length ? (
-                                <>
-                                    <h4 className={styles.restaurantCard__subtitle}>Menu</h4>
-                                    <MenuList menuIds={menuIds} />
-                                </>
-                            ) : null
-                        }
-                    </div>
-                    <div className={styles.restaurantCard__block}>
-                        {
-                            reviewsIds.length ? (
-                                <>
-                                    <h4 className={styles.restaurantCard__subtitle}>Review</h4>
-                                    <ReviewList reviewsIds={reviewsIds} />
-                                </>
-                            ) : null
-                        }
-                    </div>
-
-
+                <div className={styles.restaurantCard__tabs}>
+                    <Tab link={'menu'} title={'MENU'}></Tab>
+                    <Tab link={'reviews'} title={'REVIEW'}></Tab>
                 </div>
-                <Basket />
+
+                <div className={styles.restaurantCard__container}>
+                    <Outlet />
+                </div>
             </div>
             {
                 user && <ReviewForm />
             }
-
         </section>
     );
 }
