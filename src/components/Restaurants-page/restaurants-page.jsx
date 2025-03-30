@@ -1,13 +1,18 @@
-import { restaurants } from '../../../material/mock';
+// import { restaurants } from '../../../material/mock';
 import { Tab } from '../Tab/tab';
 import { RestaurantCard } from '../Restaurant-card/restaurant-card';
 import { useState, use } from 'react';
 import styles from './restaurants-page.module.scss';
 import classNames from 'classnames';
 import { ThemeContext } from '../Theme-context';
+import { useSelector } from 'react-redux';
+import { selectRestaurantIds } from '../../redux/entities/restaurants/slice';
+import { RestaurantCardContainer } from '../Restaurant-card/restaurant-card-container';
+import { TabContainer } from '../Tab/tab-container';
 
 export function RestaurantsPage() {
-    const [activeTabId, setActiveTabId] = useState(restaurants[0].id);
+    const restaurantIds = useSelector(selectRestaurantIds);
+    const [activeTabId, setActiveTabId] = useState(restaurantIds[0]);
     const { theme } = use(ThemeContext);
 
 
@@ -19,10 +24,6 @@ export function RestaurantsPage() {
         setActiveTabId(id);
     };
 
-    const activeRestaurantCard = restaurants.find(
-        (restaurant) => restaurant.id === activeTabId
-    );
-
     return (
         <div className={classNames(
             styles.restaurantsPage, {
@@ -31,41 +32,13 @@ export function RestaurantsPage() {
         })}>
             <div className={styles.restaurantsPage__tabs}>
                 {
-                    restaurants.map((restaurant) => (
-                        <Tab
-                            key={restaurant.name}
-                            title={restaurant.name}
-                            onClick={() => onClickHandler(restaurant.id)}
-                            isActive={restaurant.id === activeTabId}
-                        />
+                    restaurantIds.map((id) => (
+                        <TabContainer key={id} id={id} onClick={() => onClickHandler(id)} isActive={id === activeTabId} />
                     ))
                 }
             </div>
             <div className={styles.restaurantsPage__content}>
-                <RestaurantCard
-                    key={activeRestaurantCard.id}
-                    restaurant={activeRestaurantCard}
-                />
-                <RestaurantCard
-                    key={activeRestaurantCard.id + 1}
-                    restaurant={activeRestaurantCard}
-                />
-                <RestaurantCard
-                    key={activeRestaurantCard.id + 2}
-                    restaurant={activeRestaurantCard}
-                />
-                <RestaurantCard
-                    key={activeRestaurantCard.id + 3}
-                    restaurant={activeRestaurantCard}
-                />
-                <RestaurantCard
-                    key={activeRestaurantCard.id + 4}
-                    restaurant={activeRestaurantCard}
-                />
-                <RestaurantCard
-                    key={activeRestaurantCard.id + 5}
-                    restaurant={activeRestaurantCard}
-                />
+                <RestaurantCardContainer key={activeTabId} id={activeTabId} />
             </div>
         </div>
     );
