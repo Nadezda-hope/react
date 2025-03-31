@@ -1,14 +1,11 @@
-// import { restaurants } from '../../../material/mock';
-import { Tab } from '../Tab/tab';
-import { RestaurantCard } from '../Restaurant-card/restaurant-card';
-import { useState, use } from 'react';
-import styles from './restaurants-page.module.scss';
 import classNames from 'classnames';
-import { ThemeContext } from '../Theme-context';
+import { use, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectRestaurantIds } from '../../redux/entities/restaurants/slice';
 import { RestaurantCardContainer } from '../Restaurant-card/restaurant-card-container';
-import { TabContainer } from '../Tab/tab-container';
+import { TabRestaurantContainer } from '../Tab-restaurant-container/tab-restaurant-container';
+import { ThemeContext } from '../Theme-context';
+import styles from './restaurants-page.module.scss';
 
 export function RestaurantsPage() {
     const restaurantIds = useSelector(selectRestaurantIds);
@@ -33,7 +30,7 @@ export function RestaurantsPage() {
             <div className={styles.restaurantsPage__tabs}>
                 {
                     restaurantIds.map((id) => (
-                        <TabContainer key={id} id={id} onClick={() => onClickHandler(id)} isActive={id === activeTabId} />
+                        <TabRestaurantContainer key={id} id={id} onClick={() => onClickHandler(id)} isActive={id === activeTabId} />
                     ))
                 }
             </div>

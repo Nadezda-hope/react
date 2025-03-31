@@ -1,17 +1,17 @@
 import { useSelector } from 'react-redux';
 import { selectRestaurantById } from '../../redux/entities/restaurants/slice';
-import { Tab } from './tab';
+import { Tab } from '../Tab/tab';
 
-export function TabContainer({ id, onClick, isActive }) {
-    const tab = useSelector((state) => selectRestaurantById(state, id));
+export function TabRestaurantContainer({ id, onClick, isActive }) {
+    const restaurantTab = useSelector((state) => selectRestaurantById(state, id));
 
-    if (!tab) {
+    if (!restaurantTab) {
         return;
     }
 
     return (
         <Tab
-            title={tab.name}
+            title={restaurantTab.name}
             onClick={onClick}
             isActive={isActive}
         />

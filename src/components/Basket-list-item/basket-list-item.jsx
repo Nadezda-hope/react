@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { selectDishById } from '../../redux/entities/dishes/slice';
-import styles from './basket-entity.module.scss';
+import styles from './basket-list-item.module.scss';
 
-export function BasketEntity({ id, amount }) {
+export function BasketListItem({ id, amount }) {
     const dish = useSelector((state) => selectDishById(state, id));
 
     const { name } = dish;
@@ -12,6 +12,6 @@ export function BasketEntity({ id, amount }) {
     }
 
     return (
-        <li className={styles.basketEntity}>{name} - <b>{amount}</b></li>
+        <li className={styles.basketListItem}>{name} - <b>{amount}</b></li>
     );
 }

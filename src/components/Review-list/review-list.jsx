@@ -1,4 +1,4 @@
-import { ReviewItem } from '../Review-item/review-item';
+import { ReviewListItem } from '../Review-list-item/review-list-item';
 import styles from './review-list.module.scss';
 
 export function ReviewList({ reviewsIds }) {
@@ -6,7 +6,7 @@ export function ReviewList({ reviewsIds }) {
         <ul className={styles.reviews}>
             {
                 reviewsIds.map((id) => (
-                    <ReviewItem key={id} id={id} />
+                    <ReviewListItem key={id} id={id} />
                 ))
             }
         </ul>
