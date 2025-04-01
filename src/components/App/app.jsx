@@ -15,10 +15,10 @@ import { DishDetails } from '../Dish-details/dish-details';
 
 export function App() {
     return (
-        <Provider store={store}>
-            <ThemeContext>
-                <UserContext>
-                    <BrowserRouter>
+        <BrowserRouter>
+            <Provider store={store}>
+                <ThemeContext>
+                    <UserContext>
                         <Routes>
                             <Route element={<Layout />}>
                                 <Route index element={<HomePage />} />
@@ -32,9 +32,9 @@ export function App() {
                                 <Route path='/dish/:dishId' element={<DishDetails />}></Route>
                             </Route>
                         </Routes>
-                    </BrowserRouter>
-                </UserContext>
-            </ThemeContext>
-        </Provider >
+                    </UserContext>
+                </ThemeContext>
+            </Provider >
+        </BrowserRouter>
     );
 }
