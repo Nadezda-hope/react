@@ -2,16 +2,18 @@ import { useSelector } from 'react-redux';
 import { selectCountByDishId } from '../../redux/entities/basket/slice';
 import { Counter } from '../Counter/counter';
 import { use } from 'react';
-import { useMenuItemDispatch } from './use-menu-item-dispatch';
+import { useCardActions } from './use-card-actions';
 import { UserContext } from '../User-context';
 
 export function MenuItemCounter({ id }) {
-    const count = useSelector((state) => selectCountByDishId(state, id)) || 0;
-    const { increment, decrement } = useMenuItemDispatch(id);
+    const { increment, decrement, count } = useCardActions(id);
     const { user } = use(UserContext);
 
+    if (!user) {
+        return null;
+    }
+
     return (
-        user &&
         <Counter increment={increment} decrement={decrement}>
             {count}
         </Counter>
