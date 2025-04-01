@@ -1,10 +1,12 @@
 import { MenuItem } from '../Menu-item/menu-item';
-export function MenuList({ menu }) {
+import styles from './menu-list.module.scss';
+
+export function MenuList({ menuIds }) {
     return (
-        <ul>
+        <ul className={styles.menuList}>
             {
-                menu.map((item) => (
-                    <MenuItem key={item.id} item={item} />
+                menuIds.map((id) => (
+                    <MenuItem key={id} id={id} />
                 ))
             }
         </ul>

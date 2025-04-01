@@ -1,0 +1,19 @@
+.basket {
+    padding: 24px;
+    background-color: #fff0db;
+
+    &__title {
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    &__list {
+        li {
+            margin-bottom: 8px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
