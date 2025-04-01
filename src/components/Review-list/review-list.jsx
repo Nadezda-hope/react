@@ -1,5 +1,5 @@
 import { useParams } from 'react-router';
-import { ReviewItem } from '../Review-item/review-item';
+import { ReviewListItem } from '../Review-list-item/review-list-item';
 import styles from './review-list.module.scss';
 import { useSelector } from 'react-redux';
 import { selectRestaurantById } from '../../redux/entities/restaurants/slice';
@@ -16,7 +16,7 @@ export function ReviewList() {
         <ul className={styles.reviews}>
             {
                 reviews.map((id) => (
-                    <ReviewItem key={id} id={id} />
+                    <ReviewListItem key={id} id={id} />
                 ))
             }
         </ul>

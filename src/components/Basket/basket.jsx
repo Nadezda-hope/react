@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import styles from './basket.module.scss';
 import { selectDishItems } from '../../redux/entities/basket/slice';
-import { BasketEntity } from '../Basket-entity/basket-entity';
+import { BasketListItem } from '../Basket-list-item/basket-list-item';
 
 export function Basket() {
     const items = useSelector(selectDishItems);
@@ -13,7 +13,7 @@ export function Basket() {
                 {
 
                     items.map(({ id, amount }) => (
-                        <BasketEntity key={id} id={id} amount={amount} />
+                        <BasketListItem key={id} id={id} amount={amount} />
                     ))
                 }
             </ul>
