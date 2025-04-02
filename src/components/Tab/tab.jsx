@@ -1,16 +1,11 @@
 import classNames from 'classnames';
 import styles from './tab.module.scss';
+import { NavLink } from 'react-router';
 
-export function Tab({ title, onClick, isActive }) {
+export function Tab({ link, title }) {
     return (
-        <button
-            className={classNames(
-                styles.tab, {
-                [styles.isActive]: isActive
-            })}
-            onClick={onClick}
-        >
+        <NavLink to={link} className={({ isActive }) => classNames(styles.tab, isActive && styles.isActive)}>
             {title}
-        </button>
+        </NavLink>
     )
 }

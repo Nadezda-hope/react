@@ -1,13 +1,17 @@
 import { Header } from '../Header/header';
 import { Footer } from '../Footer/footer';
 import { ProgressBar } from '../Progress-bar/progress-bar';
+import { Basket } from '../Basket/basket';
+import { Outlet } from 'react-router';
+import styles from './layout.module.scss';
 
-export function Layout({ children }) {
+export function Layout() {
     return (
-        <div>
+        <div className={styles.layout}>
             <ProgressBar />
             <Header />
-            {children}
+            <Outlet />
+            <Basket />
             <Footer />
         </div>
     );

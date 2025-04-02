@@ -1,0 +1,28 @@
+.dishDetails {
+    flex: 1;
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 12px;
+
+    &__container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 48px auto;
+        padding: 20px;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+    }
+
+    &__name {
+        margin-bottom: 8px;
+    }
+
+    &__price {
+        margin-top: 12px;
+        color: #f0ad4e;
+    }
+
+    &__counter {
+        justify-self: end;
+    }
+}

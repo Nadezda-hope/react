@@ -1,4 +1,6 @@
-.restaurantsPage {
+.restaurantsList {
+    flex: 1;
+
     &__tabs {
         display: flex;
         justify-content: center;
@@ -14,7 +16,7 @@
         gap: 12px;
         max-width: 80%;
         margin: 0 auto;
-        padding-top: 48px;
+        padding: 48px 0;
     }
 
     &.isDark {
