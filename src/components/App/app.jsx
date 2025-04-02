@@ -11,7 +11,7 @@ import { ReviewList } from '../Review-list/review-list';
 import { ThemeContext } from '../Theme-context/theme-context';
 import { UserContext } from '../User-context/user-context';
 import './app.module.scss';
-import { DishDetails } from '../Dish-details/dish-details';
+import { DishDetailsPage } from '../../pages/Dish-details-page/dish-details-page';
 
 export function App() {
     return (
@@ -24,12 +24,12 @@ export function App() {
                                 <Route index element={<HomePage />} />
                                 <Route path='/restaurants' element={<RestaurantsPage />}>
                                     <Route path=':restaurantId' element={<RestaurantPage />}>
-                                        <Route index path='*' element={<Navigate to={'menu'} />} />
+                                        <Route index element={<Navigate to={'menu'} />} />
                                         <Route path='menu' element={<MenuList />} />
                                         <Route path='reviews' element={<ReviewList />} />
                                     </Route>
                                 </Route>
-                                <Route path='/dish/:dishId' element={<DishDetails />}></Route>
+                                <Route path='/dish/:dishId' element={<DishDetailsPage />}></Route>
                             </Route>
                         </Routes>
                     </UserContext>

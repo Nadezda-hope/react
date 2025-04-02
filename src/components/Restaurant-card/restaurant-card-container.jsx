@@ -9,13 +9,12 @@ export function RestaurantCardContainer({ id }) {
         return;
     }
 
-    const { name, menu, reviews } = restaurant;
+    const { name } = restaurant;
 
     return (
         <RestaurantCard
+            id={id}
             name={name}
-            menuIds={menu}
-            reviewsIds={reviews}
         />
     );
 }

@@ -1,9 +1,7 @@
-import { useSelector } from 'react-redux';
-import { selectCountByDishId } from '../../redux/entities/basket/slice';
-import { Counter } from '../Counter/counter';
 import { use } from 'react';
-import { useCardActions } from './use-card-actions';
+import { Counter } from '../Counter/counter';
 import { UserContext } from '../User-context';
+import { useCardActions } from './use-card-actions';
 
 export function MenuItemCounter({ id }) {
     const { increment, decrement, count } = useCardActions(id);

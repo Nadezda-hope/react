@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import { use, useState } from 'react';
+import { use } from 'react';
 import { useSelector } from 'react-redux';
 import { selectRestaurantIds } from '../../redux/entities/restaurants/slice';
-import { RestaurantCardContainer } from '../Restaurant-card/restaurant-card-container';
 import { RestaurantsTabsContainer } from '../Restaurants-tabs/restaurants-tabs-container';
 import { ThemeContext } from '../Theme-context';
 import styles from './restaurants-list.module.scss';

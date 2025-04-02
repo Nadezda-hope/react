@@ -1,4 +1,5 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import styles from './progress-bar.module.scss';
 
 export function ProgressBar() {
     const [progressWidth, setProgressWidth] = useState(1);
@@ -20,15 +21,6 @@ export function ProgressBar() {
     }, []);
 
     return (
-        <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: `${progressWidth}%`,
-            height: '8px',
-            background: 'tomato',
-            borderRadius: '4px',
-            zIndex: 1
-        }} />
+        <div className={styles.progressBar} style={{ width: `${progressWidth}%` }} />
     )
 }

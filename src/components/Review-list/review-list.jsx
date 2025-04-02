@@ -1,11 +1,11 @@
-import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
+import { useOutletContext } from 'react-router';
+import { selectRestaurantById } from '../../redux/entities/restaurants/slice';
 import { ReviewListItem } from '../Review-list-item/review-list-item';
 import styles from './review-list.module.scss';
-import { useSelector } from 'react-redux';
-import { selectRestaurantById } from '../../redux/entities/restaurants/slice';
 
 export function ReviewList() {
-    const { restaurantId } = useParams();
+    const { restaurantId } = useOutletContext();
     const { reviews } = useSelector((state) => selectRestaurantById(state, restaurantId));
 
     if (!reviews) {

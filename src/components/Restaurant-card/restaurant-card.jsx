@@ -1,14 +1,12 @@
 import classNames from 'classnames';
 import { use } from 'react';
-import { MenuList } from '../Menu-list/menu-list';
+import { Outlet } from 'react-router';
 import { ReviewForm } from '../Review-form/review-form';
-import { ReviewList } from '../Review-list/review-list';
+import { Tab } from '../Tab/tab';
 import { UserContext } from '../User-context';
 import styles from './restaurant-card.module.scss';
-import { Tab } from '../Tab/tab';
-import { Outlet } from 'react-router';
 
-export function RestaurantCard({ name, menuIds, reviewsIds }) {
+export function RestaurantCard({ id, name }) {
     const { user } = use(UserContext);
 
     return (
@@ -23,7 +21,7 @@ export function RestaurantCard({ name, menuIds, reviewsIds }) {
                 </div>
 
                 <div className={styles.restaurantCard__container}>
-                    <Outlet />
+                    <Outlet context={{ restaurantId: id }} />
                 </div>
             </div>
             {
