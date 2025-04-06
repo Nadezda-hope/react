@@ -1,16 +1,28 @@
+import { useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router';
+import { getDishes } from '../../redux/entities/dishes/get-dishes';
+import { selectDishesIds } from '../../redux/entities/dishes/slice';
+import { useRequest } from '../../redux/hooks/use-request';
 import { MenuItem } from '../Menu-item/menu-item';
 import styles from './menu-list.module.scss';
-import { selectRestaurantById } from '../../redux/entities/restaurants/slice';
-import { useSelector } from 'react-redux';
+import { Loader } from '../Loader/loader';
 
 export function MenuList() {
     const { restaurantId } = useOutletContext();
-    const { menu } = useSelector((state) => selectRestaurantById(state, restaurantId));
+    const requestStatus = useRequest(getDishes, restaurantId);
+    const menu = useSelector(selectDishesIds);
 
-    if (!menu) {
-        return;
-    };
+    if (requestStatus === 'idle' || requestStatus === 'pending') {
+        return (
+            <Loader />
+        )
+    }
+
+    if (requestStatus === 'rejected') {
+        return (
+            <div>Something went wrong</div>
+        );
+    }
 
     return (
         <div className={styles.menuList}>
