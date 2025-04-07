@@ -7,31 +7,22 @@ import { useRequest } from '../../redux/hooks/use-request';
 import { Loader } from '../Loader/loader';
 import { ReviewListItem } from '../Review-list-item/review-list-item';
 import styles from './review-list.module.scss';
+import { State } from '../State/state';
 
 export function ReviewList() {
     const { restaurantId } = useOutletContext();
     const requestStatus = useRequest(getReviews, restaurantId);
     const reviews = useSelector((state) => selectReviewsIds(state, restaurantId));
 
-    if (requestStatus === IDLE || requestStatus === PENDING) {
-        return (
-            <Loader />
-        )
-    }
-
-    if (requestStatus === REJECTED) {
-        return (
-            <div>Something went wrong</div>
-        );
-    }
-
     return (
-        <ul className={styles.reviews}>
-            {
-                reviews.map((id) => (
-                    <ReviewListItem key={id} id={id} />
-                ))
-            }
-        </ul>
+        <State state={requestStatus}>
+            <ul className={styles.reviews}>
+                {
+                    reviews.map((id) => (
+                        <ReviewListItem key={id} id={id} />
+                    ))
+                }
+            </ul>
+        </State>
     )
 }

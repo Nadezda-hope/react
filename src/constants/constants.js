@@ -12,9 +12,7 @@ export const INITIAL_FORM_VALUES = {
     grade: 1
 };
 
-// #region state
 export const IDLE = 'idle';
 export const PENDING = 'pending';
 export const REJECTED = 'rejected';
 export const FULFILLED = 'fulfilled';
-//#endregion
