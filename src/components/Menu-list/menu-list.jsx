@@ -1,24 +1,26 @@
-import { useOutletContext } from 'react-router';
-import { MenuItem } from '../Menu-item/menu-item';
-import styles from './menu-list.module.scss';
-import { selectRestaurantById } from '../../redux/entities/restaurants/slice';
 import { useSelector } from 'react-redux';
+import { useOutletContext } from 'react-router';
+import { getDishes } from '../../redux/entities/dishes/get-dishes';
+import { selectDishesIds } from '../../redux/entities/dishes/slice';
+import { useRequest } from '../../redux/hooks/use-request';
+import { MenuItem } from '../Menu-item/menu-item';
+import { State } from '../State/state';
+import styles from './menu-list.module.scss';
 
 export function MenuList() {
     const { restaurantId } = useOutletContext();
-    const { menu } = useSelector((state) => selectRestaurantById(state, restaurantId));
-
-    if (!menu) {
-        return;
-    };
+    const requestStatus = useRequest(getDishes, restaurantId);
+    const menu = useSelector(selectDishesIds);
 
     return (
-        <div className={styles.menuList}>
-            {
-                menu.map((id) => (
-                    <MenuItem key={id} id={id} />
-                ))
-            }
-        </div>
+        <State state={requestStatus}>
+            <div className={styles.menuList}>
+                {
+                    menu.map((id) => (
+                        <MenuItem key={id} id={id} />
+                    ))
+                }
+            </div>
+        </State>
     )
 }
