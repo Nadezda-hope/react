@@ -11,6 +11,8 @@
 
     &__container {
         display: flex;
+        gap: 16px;
+        margin-bottom: 64px;
     }
 
     &__block {
@@ -19,13 +21,20 @@
 
     &__tabs {
         display: flex;
-        gap: 16px;
+        gap: 24px;
         margin-bottom: 32px;
     }
 
     &__wrap {
-        &.withForm {
-            margin-bottom: 24px;
-        }
+        flex: 1;
+    }
+
+    &__imgWrap {
+        padding-top: 52px;
+    }
+
+    &__img {
+        object-fit: cover;
+        border-radius: 4px;
     }
 }

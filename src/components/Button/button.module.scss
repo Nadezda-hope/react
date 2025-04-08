@@ -24,4 +24,8 @@
     &:hover {
         background-color: #ffd25d;
     }
+
+    &[disabled] {
+        background-color: #ccc;
+    }
 }

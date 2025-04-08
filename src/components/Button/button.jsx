@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './button.module.scss';
 import { ThemeContext } from '../Theme-context';
 
-export function Button({ onClickHandler, children, type = 'button' }) {
+export function Button({ onClickHandler, children, type = 'button', isDisabled }) {
     const { theme } = use(ThemeContext);
     return (
         <button className={classNames(styles.button, {
@@ -12,6 +12,7 @@ export function Button({ onClickHandler, children, type = 'button' }) {
         })}
             type={type}
             onClick={onClickHandler}
+            disabled={isDisabled}
         >
             {children}
         </button>
