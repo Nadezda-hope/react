@@ -1,6 +1,6 @@
 import { Loader } from '../Loader/loader';
 
-export function State({ isLoading, isError, children }) {
+export function State({ isLoading, isError }) {
     if (isLoading) {
         return <Loader />
     }
@@ -10,10 +10,4 @@ export function State({ isLoading, isError, children }) {
             <div>Something went wrong</div>
         )
     }
-
-    return (
-        <>
-            {children}
-        </>
-    )
 }

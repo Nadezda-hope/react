@@ -6,29 +6,31 @@ import styles from './dish-details.module.scss';
 export function DishDetails({ dishId }) {
     const { data, isLoading, isError } = useGetDishQuery(dishId);
 
+    if (isLoading || isError) {
+        return <State isLoading={isLoading} isError={isError} />
+    }
+
+    if (!data) {
+        return null;
+    }
+
     return (
-        <State isLoading={isLoading} isError={isError}>
-            {
-                data &&
-                <div className={styles.dishDetails}>
-                    <div className={styles.dishDetails__container}>
-                        <div>
-                            <h4 className={styles.dishDetails__name}>{data.name}</h4>
-                            {
-                                data.ingredients.map((ingredient) => ingredient).join(' ')
-                            }
-                            {
-                                <div className={styles.dishDetails__price}>{data.price} $</div>
-                            }
-                        </div>
-
-                        <div className={styles.dishDetails__counter}>
-                            <MenuItemCounter id={dishId} />
-                        </div>
-                    </div>
+        <div className={styles.dishDetails}>
+            <div className={styles.dishDetails__container}>
+                <div>
+                    <h4 className={styles.dishDetails__name}>{data.name}</h4>
+                    {
+                        data.ingredients.map((ingredient) => ingredient).join(' ')
+                    }
+                    {
+                        <div className={styles.dishDetails__price}>{data.price} $</div>
+                    }
                 </div>
-            }
-        </State>
 
+                <div className={styles.dishDetails__counter}>
+                    <MenuItemCounter id={dishId} />
+                </div>
+            </div>
+        </div>
     )
 }

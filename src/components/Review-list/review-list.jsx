@@ -19,18 +19,21 @@ export function ReviewList() {
         isError: isUsersError
     } = useGetUsersQuery();
 
+    if ((isReviewLoading || isUsersLoading) || (isReviewError || isUsersError)) {
+        return <State isLoading={isReviewLoading || isUsersLoading} isError={isReviewError || isUsersError} />
+    }
+
+    if (!reviewData && !usersData) {
+        return null;
+    }
+
     return (
-        <State isLoading={isReviewLoading || isUsersLoading} isError={isReviewError || isUsersError}>
+        <ul className={styles.reviews}>
             {
-                reviewData && usersData &&
-                <ul className={styles.reviews}>
-                    {
-                        reviewData.map((review) => (
-                            <ReviewListItem key={review.id} review={review} />
-                        ))
-                    }
-                </ul>
+                reviewData.map((review) => (
+                    <ReviewListItem key={review.id} review={review} />
+                ))
             }
-        </State>
+        </ul>
     )
 }

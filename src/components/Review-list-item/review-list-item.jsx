@@ -31,8 +31,6 @@ export function ReviewListItem({ review }) {
     if (!user) {
         if (review.userId === currentUser.id) {
             user = currentUser;
-        } else {
-            return;
         }
     }
 

@@ -8,15 +8,21 @@ export function MenuList() {
     const { restaurantId } = useOutletContext();
     const { data: menu, isLoading, isError } = useGetDishesByRestaurantIdQuery(restaurantId);
 
+    if (isLoading || isError) {
+        return <State isLoading={isLoading} isError={isError} />
+    }
+
+    if (!menu) {
+        return null;
+    }
+
     return (
-        <State isLoading={isLoading} isError={isError}>
-            <div className={styles.menuList}>
-                {
-                    menu && menu.map(({ id, name }) => (
-                        <MenuItem key={id} id={id} name={name} />
-                    ))
-                }
-            </div>
-        </State>
+        <div className={styles.menuList}>
+            {
+                menu.map(({ id, name }) => (
+                    <MenuItem key={id} id={id} name={name} />
+                ))
+            }
+        </div>
     )
 }
