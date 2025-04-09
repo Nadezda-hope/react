@@ -14,6 +14,6 @@ export function BasketListItem({ id, amount }) {
     }
 
     return (
-        dish && <li className={styles.basketListItem}>{dish.name} - <b>{amount}</b></li>
+        <li className={styles.basketListItem}>{dish.name} - <b>{amount}</b></li>
     );
 }

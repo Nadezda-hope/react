@@ -8,9 +8,9 @@ import { ReviewForm } from '../Review-form/review-form';
 export function ReviewListItem({ review }) {
     const [isEdit, changeEditState] = useState(false);
     const { user: currentUser } = use(UserContext);
+    const isCurrentUserReview = review.userId === currentUser.id;
     const [editReview, { isLoading }] = useEditReviewMutation();
-
-    let { data: user } = useGetUsersQuery(undefined, {
+    const { data: user } = useGetUsersQuery(undefined, {
         selectFromResult: (result) => {
             return {
                 ...result,
@@ -28,14 +28,7 @@ export function ReviewListItem({ review }) {
         onChangeEditState();
     }
 
-    if (!user) {
-        if (review.userId === currentUser.id) {
-            user = currentUser;
-        }
-    }
-
     const { text } = review;
-    const { name } = user;
 
     return (
         <li className={styles.reviewItem}>
@@ -52,16 +45,16 @@ export function ReviewListItem({ review }) {
                             ))
                         }
                     </div>
-                    <div>"<i>{text}</i>", - {name}</div>
+                    <div>"<i>{text}</i>", - {user ? user.name : currentUser.name}</div>
                 </div>
                 {
-                    user === currentUser && <Button onClickHandler={onChangeEditState}>Edit</Button>
+                    isCurrentUserReview && <Button onClickHandler={onChangeEditState}>Edit</Button>
                 }
             </div>
             {
-                user === currentUser && isEdit && review &&
+                isCurrentUserReview && isEdit && review &&
                 <div className={styles.reviewItem__form}>
-                    <ReviewForm review={review} user={user} onSubmit={handleEdit} isSubmitButtonDisabled={isLoading} />
+                    <ReviewForm review={review} user={currentUser} onSubmit={handleEdit} isSubmitButtonDisabled={isLoading} />
                 </div>
             }
 
