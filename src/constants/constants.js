@@ -9,7 +9,7 @@ export const CHANGE_RATING = 'INCREASE_RATING';
 export const INITIAL_FORM_VALUES = {
     name: '',
     text: '',
-    grade: 1
+    rating: 1
 };
 
 export const IDLE = 'idle';

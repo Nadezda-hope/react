@@ -19,7 +19,7 @@ export function reducer(state, { type, payload }) {
         case CHANGE_RATING:
             return {
                 ...state,
-                grade: payload
+                rating: payload
             };
         default:
             return state;

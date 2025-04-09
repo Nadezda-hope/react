@@ -1,21 +1,29 @@
-import { useSelector } from 'react-redux';
-import { selectDishById } from '../../redux/entities/dishes/slice';
+import { useGetDishQuery } from '../../redux/services/api-service';
 import { MenuItemCounter } from '../Menu-item-counter/menu-item-counter';
+import { State } from '../State/state';
 import styles from './dish-details.module.scss';
 
 export function DishDetails({ dishId }) {
-    const { name, price, ingredients } = useSelector((state) => selectDishById(state, dishId));
+    const { data, isLoading, isError } = useGetDishQuery(dishId);
+
+    if (isLoading || isError) {
+        return <State isLoading={isLoading} isError={isError} />
+    }
+
+    if (!data) {
+        return null;
+    }
 
     return (
         <div className={styles.dishDetails}>
             <div className={styles.dishDetails__container}>
                 <div>
-                    <h4 className={styles.dishDetails__name}>{name}</h4>
+                    <h4 className={styles.dishDetails__name}>{data.name}</h4>
                     {
-                        ingredients.map((ingredient) => ingredient).join(' ')
+                        data.ingredients.map((ingredient) => ingredient).join(' ')
                     }
                     {
-                        <div className={styles.dishDetails__price}>{price} $</div>
+                        <div className={styles.dishDetails__price}>{data.price} $</div>
                     }
                 </div>
 

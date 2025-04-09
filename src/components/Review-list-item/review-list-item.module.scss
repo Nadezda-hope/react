@@ -1,0 +1,19 @@
+.reviewItem {
+    &__review {
+        display: flex;
+    }
+
+    &__content {
+        flex: 1;
+    }
+
+    &__list {
+        display: flex;
+        gap: 4px;
+    }
+
+    &__form {
+        margin-top: 16px;
+        margin-bottom: 24px;
+    }
+}

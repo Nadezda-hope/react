@@ -1,17 +1,19 @@
-import { useSelector } from 'react-redux';
-import { selectDishById } from '../../redux/entities/dishes/slice';
+import { useGetDishQuery } from '../../redux/services/api-service';
+import { State } from '../State/state';
 import styles from './basket-list-item.module.scss';
 
 export function BasketListItem({ id, amount }) {
-    const dish = useSelector((state) => selectDishById(state, id));
+    const { data: dish, isLoading, isError } = useGetDishQuery(id);
 
-    const { name } = dish;
+    if (isLoading || isError) {
+        return <State isLoading={isLoading} isError={isError} />
+    }
 
     if (!dish) {
-        return;
+        return null;
     }
 
     return (
-        <li className={styles.basketListItem}>{name} - <b>{amount}</b></li>
+        <li className={styles.basketListItem}>{dish.name} - <b>{amount}</b></li>
     );
 }
