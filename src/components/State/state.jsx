@@ -1,20 +1,13 @@
-import { IDLE, PENDING, REJECTED } from '../../constants/constants';
 import { Loader } from '../Loader/loader';
 
-export function State({ state, children }) {
-    if (state === IDLE || state === PENDING) {
+export function State({ isLoading, isError }) {
+    if (isLoading) {
         return <Loader />
     }
 
-    if (state === REJECTED) {
+    if (isError) {
         return (
             <div>Something went wrong</div>
         )
     }
-
-    return (
-        <>
-            {children}
-        </>
-    )
 }

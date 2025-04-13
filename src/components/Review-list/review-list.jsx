@@ -1,28 +1,39 @@
-import { useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router';
-import { IDLE, PENDING, REJECTED } from '../../constants/constants';
-import { getReviews } from '../../redux/entities/reviews/get-reviews';
-import { selectReviewsIds } from '../../redux/entities/reviews/slice';
-import { useRequest } from '../../redux/hooks/use-request';
-import { Loader } from '../Loader/loader';
+import { useGetReviewsByRestaurantIdQuery, useGetUsersQuery } from '../../redux/services/api-service';
 import { ReviewListItem } from '../Review-list-item/review-list-item';
-import styles from './review-list.module.scss';
 import { State } from '../State/state';
+import styles from './review-list.module.scss';
 
 export function ReviewList() {
     const { restaurantId } = useOutletContext();
-    const requestStatus = useRequest(getReviews, restaurantId);
-    const reviews = useSelector((state) => selectReviewsIds(state, restaurantId));
+
+    const {
+        data: reviewData,
+        isLoading: isReviewLoading,
+        isError: isReviewError
+    } = useGetReviewsByRestaurantIdQuery(restaurantId);
+
+    const {
+        data: usersData,
+        isLoading: isUsersLoading,
+        isError: isUsersError
+    } = useGetUsersQuery();
+
+    if ((isReviewLoading || isUsersLoading) || (isReviewError || isUsersError)) {
+        return <State isLoading={isReviewLoading || isUsersLoading} isError={isReviewError || isUsersError} />
+    }
+
+    if (!reviewData && !usersData) {
+        return null;
+    }
 
     return (
-        <State state={requestStatus}>
-            <ul className={styles.reviews}>
-                {
-                    reviews.map((id) => (
-                        <ReviewListItem key={id} id={id} />
-                    ))
-                }
-            </ul>
-        </State>
+        <ul className={styles.reviews}>
+            {
+                reviewData.map((review) => (
+                    <ReviewListItem key={review.id} review={review} />
+                ))
+            }
+        </ul>
     )
 }

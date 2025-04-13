@@ -1,20 +1,23 @@
-import { useSelector } from 'react-redux';
+import { useGetRestaurantsQuery } from '../../redux/services/api-service';
 import { RestaurantCard } from './restaurant-card';
-import { selectRestaurantById } from '../../redux/entities/restaurants/slice';
 
 export function RestaurantCardContainer({ id }) {
-    const restaurant = useSelector((state) => selectRestaurantById(state, id));
+    const { data } = useGetRestaurantsQuery(undefined, {
+        selectFromResult: (result) => ({
+            ...result,
+            data: result.data?.find((item) => item.id === id)
+        })
+    });
 
-    if (!restaurant) {
+    if (!data) {
         return;
     }
-
-    const { name } = restaurant;
 
     return (
         <RestaurantCard
             id={id}
-            name={name}
+            name={data.name}
+            img={data.img}
         />
     );
 }

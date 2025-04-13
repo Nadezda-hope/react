@@ -1,8 +1,13 @@
 import { useCallback, useReducer } from 'react';
 import { INITIAL_FORM_VALUES, CHANGE_NAME, CHANGE_TEXT, MAX_COUNT, MIN_COUNT, CHANGE_RATING, RESET_FORM } from '../../constants/constants';
 import { reducer } from './reducer';
-export function useReviewFormReducer() {
-    const [form, dispatch] = useReducer(reducer, INITIAL_FORM_VALUES);
+export function useReviewFormReducer({ review }) {
+    const [form, dispatch] = useReducer(
+        reducer,
+        review
+            ? { name: '', text: review.text, rating: review.rating }
+            : INITIAL_FORM_VALUES
+    );
 
     const onNameChange = useCallback((event) => {
         dispatch({ type: CHANGE_NAME, payload: event });
@@ -13,20 +18,20 @@ export function useReviewFormReducer() {
     }, []);
 
     const onIncreaseGrade = useCallback(() => {
-        if (form.grade === MAX_COUNT) {
+        if (form.rating === MAX_COUNT) {
             return;
         }
 
-        dispatch({ type: CHANGE_RATING, payload: form.grade + 1 });
-    }, [form.grade]);
+        dispatch({ type: CHANGE_RATING, payload: form.rating + 1 });
+    }, [form.rating]);
 
     const onDecreaseGrade = useCallback(() => {
-        if (form.grade === MIN_COUNT) {
+        if (form.rating === MIN_COUNT) {
             return;
         }
 
-        dispatch({ type: CHANGE_RATING, payload: form.grade - 1 });
-    }, [form.grade]);
+        dispatch({ type: CHANGE_RATING, payload: form.rating - 1 });
+    }, [form.rating]);
 
     const onClickHandler = useCallback(() => {
         dispatch({ type: RESET_FORM });

@@ -1,38 +1,44 @@
 import classNames from 'classnames';
 import { use } from 'react';
-import { useSelector } from 'react-redux';
-import { Outlet } from 'react-router';
-import { getRestaurants } from '../../redux/entities/restaurants/get-restaurants';
-import { selectRestaurantIds } from '../../redux/entities/restaurants/slice';
-import { useRequest } from '../../redux/hooks/use-request';
-import { RestaurantsTabsContainer } from '../Restaurants-tabs/restaurants-tabs-container';
+import { useGetRestaurantsQuery } from '../../redux/services/api-service';
 import { State } from '../State/state';
+import { Tab } from '../Tab/tab';
 import { ThemeContext } from '../Theme-context';
 import styles from './restaurants-list.module.scss';
+import { Outlet } from 'react-router';
 
 export function RestaurantsList() {
-    const requestStatus = useRequest(getRestaurants);
-    const restaurantIds = useSelector(selectRestaurantIds);
+    const { data, isLodaing, isError } = useGetRestaurantsQuery();
     const { theme } = use(ThemeContext);
 
+    if (isLodaing || isError) {
+        return <State isLoading={isLodaing} isError={isError} />
+    }
+
+    if (!data) {
+        return null;
+    }
+
     return (
-        <State state={requestStatus}>
-            <div className={classNames(
-                styles.restaurantsList, {
-                [styles.isLight]: theme === 'light',
-                [styles.isDark]: theme === 'dark'
-            })}>
-                <div className={styles.restaurantsList__tabs}>
-                    {
-                        restaurantIds.map((id) => (
-                            <RestaurantsTabsContainer key={id} id={id} />
-                        ))
-                    }
-                </div>
-                <div className={styles.restaurantsList__content}>
-                    <Outlet />
-                </div>
+        <div className={classNames(
+            styles.restaurantsList, {
+            [styles.isLight]: theme === 'light',
+            [styles.isDark]: theme === 'dark'
+        })}>
+            <div className={styles.restaurantsList__tabs}>
+                {
+                    data?.map((item) => (
+                        <Tab
+                            key={item.id}
+                            link={item.id}
+                            title={item.name}
+                        />
+                    ))
+                }
             </div>
-        </State>
-    );
+            <div className={styles.restaurantsList__content}>
+                <Outlet />
+            </div>
+        </div>
+    )
 }
