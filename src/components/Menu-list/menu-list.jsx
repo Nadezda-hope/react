@@ -1,11 +1,11 @@
-import { useOutletContext } from 'react-router';
+'use client';
+
 import { useGetDishesByRestaurantIdQuery } from '../../redux/services/api-service';
 import { MenuItem } from '../Menu-item/menu-item';
 import { State } from '../State/state';
 import styles from './menu-list.module.scss';
 
-export function MenuList() {
-    const { restaurantId } = useOutletContext();
+export function MenuList({ restaurantId }) {
     const { data: menu, isLoading, isError } = useGetDishesByRestaurantIdQuery(restaurantId);
 
     if (isLoading || isError) {

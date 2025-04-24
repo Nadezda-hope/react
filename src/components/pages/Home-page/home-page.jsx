@@ -1,10 +1,10 @@
-import { Link } from 'react-router'
+import Link from 'next/link';
 import styles from './home-page.module.scss';
 
 export function HomePage() {
     return (
         <div className={styles.homePage}>
-            <Link to={'/restaurants'}>To restaurants list</Link>
+            <Link href={'/restaurants'}>To restaurants list</Link>
         </div>
     )
 }
