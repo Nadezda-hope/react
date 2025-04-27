@@ -1,6 +1,4 @@
-'use client';
-
-import { Provider } from 'react-redux';
+import { AppProvider } from '../App-Provider/app-provider';
 import { Basket } from '../Basket/basket';
 import { Footer } from '../Footer/footer';
 import { Header } from '../Header/header';
@@ -8,12 +6,11 @@ import { ProgressBar } from '../Progress-bar/progress-bar';
 import { ThemeContext } from '../Theme-context/theme-context';
 import { UserContext } from '../User-context/user-context';
 import styles from './layout.module.scss';
-import { store } from '../../redux/store';
 
 export default function Layout({ children }) {
     return (
         <div className={styles.layout}>
-            <Provider store={store}>
+            <AppProvider>
                 <ThemeContext>
                     <UserContext>
                         <ProgressBar />
@@ -23,8 +20,7 @@ export default function Layout({ children }) {
                         <Footer />
                     </UserContext>
                 </ThemeContext>
-            </Provider>;
-
+            </AppProvider>
         </div>
     );
 }

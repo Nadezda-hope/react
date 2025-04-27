@@ -1,5 +1,3 @@
-'use client';
-
 import styles from './header.module.scss';
 import { SwitchTheme } from '../SwitchTheme/switch-theme';
 import { SignIn } from '../Sign-in/sign-in';

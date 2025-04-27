@@ -1,5 +1,5 @@
 'use client';
 
-export default function isCustomErrorPage() {
+export default function ErrorPage() {
     return 'Something went wrong';
 }

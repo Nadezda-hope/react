@@ -1,7 +1,7 @@
-import { DishDetailsPage } from '../../../components/pages/Dish-details-page/dish-details-page';
+import { DishDetails } from '../../../components/Dish-details/dish-details';
 
 export default async function DishPageContainer({ params }) {
     const { dishId } = await params;
 
-    return <DishDetailsPage dishId={dishId} />
+    return <DishDetails dishId={dishId} />
 }
