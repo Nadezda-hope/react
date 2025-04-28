@@ -1,31 +1,29 @@
-import { Counter } from '../Counter/counter';
-import { useReviewFormReducer } from './use-review-form-reducer';
-import styles from './review-form.module.scss';
+import { useActionState, useRef } from 'react';
+import { INITIAL_FORM_VALUES } from '../../constants/constants';
 import { Button } from '../Button/button';
+import { RatingCounter } from '../Rating-counter/rating-counter';
+import styles from './review-form.module.scss';
 
-export function ReviewForm({ onSubmit, user, isSubmitButtonDisabled, review }) {
-    const { form, onNameChange, onTextChange, onIncreaseGrade, onDecreaseGrade, onClickHandler } = useReviewFormReducer({ review });
-    const { name, text, rating } = form;
-    const { id: userId } = user;
+export function ReviewForm({ submitFormAction }) {
+    const ratingRef = useRef();
+    const [formState, submitAction, isPending] = useActionState(submitFormAction, { text: '', rating: 5 })
 
     return (
-        <form className={styles.reviewForm}>
+        <form className={styles.reviewForm} action={submitAction}>
             <div className={styles.reviewForm__container}>
                 <label className={styles.reviewForm__control}> Name
-                    <input className={styles.reviewForm__input} type="text" value={name} onChange={(event) => onNameChange(event.target.value)} />
+                    <input className={styles.reviewForm__input} type="name" name='name' id='name' defaultValue={formState.name} />
                 </label>
                 <label className={styles.reviewForm__control}> Leave your review
-                    <textarea className={styles.reviewForm__input} type="text" value={text} onChange={(event) => onTextChange(event.target.value)}></textarea>
+                    <textarea className={styles.reviewForm__input} type="text" name='text' id='text' defaultValue={formState.text}></textarea>
                 </label>
             </div>
             <div className={styles.reviewForm__actions}>
-                <Counter increment={onIncreaseGrade} decrement={onDecreaseGrade}>
-                    {rating}
-                </Counter>
-                <Button type='reset' onClickHandler={onClickHandler}>
+                <RatingCounter ref={ratingRef} defaultValue={formState.rating} />
+                <Button formAction={() => submitAction(null)}>
                     Clear
                 </Button>
-                <Button type='submit' onClickHandler={() => onSubmit({ text, rating, userId })} isDisabled={isSubmitButtonDisabled}>
+                <Button type='submit' isDisabled={isPending}>
                     Submit
                 </Button>
             </div>

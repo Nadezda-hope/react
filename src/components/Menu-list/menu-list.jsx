@@ -1,16 +1,9 @@
-'use client';
-
-import { useGetDishesByRestaurantIdQuery } from '../../redux/services/api-service';
+import { use } from 'react';
 import { MenuItem } from '../Menu-item/menu-item';
-import { State } from '../State/state';
 import styles from './menu-list.module.scss';
 
-export function MenuList({ restaurantId }) {
-    const { data: menu, isLoading, isError } = useGetDishesByRestaurantIdQuery(restaurantId);
-
-    if (isLoading || isError) {
-        return <State isLoading={isLoading} isError={isError} />
-    }
+export function MenuList({ menuPromise }) {
+    const menu = use(menuPromise);
 
     if (!menu) {
         return null;

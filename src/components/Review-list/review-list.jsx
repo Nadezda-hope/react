@@ -1,26 +1,13 @@
-'use client';
-
-import { useGetReviewsByRestaurantIdQuery, useGetUsersQuery } from '../../redux/services/api-service';
+import { getReviews } from '../../services/get-reviews';
+import { getUsers } from '../../services/get-users';
 import { ReviewListItem } from '../Review-list-item/review-list-item';
-import { State } from '../State/state';
 import styles from './review-list.module.scss';
 
-export function ReviewList({ restaurantId }) {
-    const {
-        data: reviewData,
-        isLoading: isReviewLoading,
-        isError: isReviewError
-    } = useGetReviewsByRestaurantIdQuery(restaurantId);
+export async function ReviewList({ restaurantId }) {
+    const reviewPromise = getReviews(restaurantId);
+    const usersPromise = getUsers();
 
-    const {
-        data: usersData,
-        isLoading: isUsersLoading,
-        isError: isUsersError
-    } = useGetUsersQuery();
-
-    if ((isReviewLoading || isUsersLoading) || (isReviewError || isUsersError)) {
-        return <State isLoading={isReviewLoading || isUsersLoading} isError={isReviewError || isUsersError} />
-    }
+    const [reviewData, usersData] = await Promise.all([reviewPromise, usersPromise]);
 
     if (!reviewData && !usersData) {
         return null;
@@ -29,9 +16,11 @@ export function ReviewList({ restaurantId }) {
     return (
         <ul className={styles.reviews}>
             {
-                reviewData.map((review) => (
-                    <ReviewListItem key={review.id} review={review} />
-                ))
+                reviewData.map((review) => {
+                    const reviewUser = usersData.find((user) => review.userId === user.id);
+
+                    return <ReviewListItem key={review.id} review={review} user={reviewUser} restaurantId={restaurantId} />
+                })
             }
         </ul>
     )

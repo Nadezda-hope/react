@@ -1,33 +1,57 @@
 'use client';
 
-import { use, useState } from 'react';
-import { useEditReviewMutation, useGetUsersQuery } from '../../redux/services/api-service';
-import { UserContext } from '../User-context';
-import styles from './review-list-item.module.scss';
+import { editReviewAction } from '@/actions/edit-review-action';
+import { use, useCallback, useOptimistic, useState } from 'react';
 import { Button } from '../Button/button';
 import { ReviewForm } from '../Review-form/review-form';
+import { UserContext } from '../User-context';
+import styles from './review-list-item.module.scss';
 
-export function ReviewListItem({ review }) {
+export function ReviewListItem({ review, user, restaurantId }) {
     const [isEdit, changeEditState] = useState(false);
     const { user: currentUser } = use(UserContext);
     const isCurrentUserReview = review.userId === currentUser.id;
-    const [editReview, { isLoading }] = useEditReviewMutation();
-    const { data: user } = useGetUsersQuery(undefined, {
-        selectFromResult: (result) => {
-            return {
-                ...result,
-                data: result.data?.find((user) => user.id === review.userId)
+
+    const [optimisticReview, addOptimisicReview] = useOptimistic(
+        review,
+        (currentState, opmisticValue) => [
+            ...currentState,
+            { ...opmisticValue, id: 'creating' },
+        ]
+    );
+
+    const handleAddReview = useCallback(
+        async (state, formData) => {
+            if (formData === null) {
+                return {
+                    text: '',
+                    rating: 5
+                };
             }
-        }
-    });
+
+            const text = formData.get('text');
+            const rating = formData.get('rating');
+
+            const review = { text, rating };
+
+            addOptimisicReview(review);
+
+            await editReviewAction({ restaurantId, review });
+
+            return {
+                text: '',
+                rating: 5
+            };
+        },
+        [addOptimisicReview, restaurantId]
+    );
+
+    if (!optimisticReview) {
+        return null;
+    }
 
     const onChangeEditState = () => {
         changeEditState(!isEdit);
-    }
-
-    const handleEdit = (currentReview) => {
-        editReview({ reviewId: review.id, review: currentReview });
-        onChangeEditState();
     }
 
     const { text } = review;
@@ -56,10 +80,9 @@ export function ReviewListItem({ review }) {
             {
                 isCurrentUserReview && isEdit && review &&
                 <div className={styles.reviewItem__form}>
-                    <ReviewForm review={review} user={currentUser} onSubmit={handleEdit} isSubmitButtonDisabled={isLoading} />
+                    <ReviewForm submitFormAction={handleAddReview} />
                 </div>
             }
-
         </li>
     );
 }
