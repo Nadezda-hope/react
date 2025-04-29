@@ -1,10 +1,7 @@
-import { RestaurantPage } from '../../../components/pages/Restaurant-page/restaurant-page';
+import { RestaurantCardContainer } from '../../../components/Restaurant-card/restaurant-card-container';
 
 export default async function RestaurantLayout({ children, params }) {
     const { restaurantId } = await params;
-    return (
-        <RestaurantPage restaurantId={restaurantId}>
-            {children}
-        </RestaurantPage>
-    );
+
+    return <RestaurantCardContainer id={restaurantId}>{children}</RestaurantCardContainer>;
 }
