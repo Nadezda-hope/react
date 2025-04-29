@@ -18,7 +18,7 @@ export default async function RestaurantPageLayout({ children, params }) {
 
     return (
         <Suspense fallback={<Loader />}>
-            <RestaurantPage restaurantId={restaurantId}>{children}</RestaurantPage>;
+            <RestaurantPage restaurantId={restaurantId}>{children}</RestaurantPage>
         </Suspense>
     )
 };
