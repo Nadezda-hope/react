@@ -1,20 +1,39 @@
 'use client';
 
+import { addReviewAction } from '@/actions/add-review-action';
 import classNames from 'classnames';
-import { use } from 'react';
+import { use, useCallback } from 'react';
 import { ReviewForm } from '../Review-form/review-form';
 import { Tab } from '../Tab/tab';
 import { UserContext } from '../User-context';
 import styles from './restaurant-card.module.scss';
-import { useAddReviewMutation } from '../../redux/services/api-service';
 
 export function RestaurantCard({ children, id, name, img }) {
     const { user } = use(UserContext);
-    const [addReview, { isLoading }] = useAddReviewMutation();
 
-    const handleSubmit = (review) => {
-        addReview({ restaurantId: id, review })
-    }
+    const handleAddReview = useCallback(
+        async (state, formData) => {
+            if (formData === null) {
+                return {
+                    text: '',
+                    rating: 5
+                };
+            }
+
+            const text = formData.get('text');
+            const rating = formData.get('rating');
+
+            const review = { text, rating };
+
+            await addReviewAction({ id, review });
+
+            return {
+                text: '',
+                rating: 5
+            };
+        },
+        [id]
+    );
 
     return (
         <section className={styles.restaurantCard}>
@@ -37,7 +56,7 @@ export function RestaurantCard({ children, id, name, img }) {
                 </div>
             </div>
             {
-                user && <ReviewForm user={user} onSubmit={handleSubmit} isSubmitButtonDisabled={isLoading} />
+                user && <ReviewForm submitFormAction={handleAddReview} />
             }
         </section>
     );

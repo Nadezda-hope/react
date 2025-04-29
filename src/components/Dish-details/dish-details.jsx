@@ -1,16 +1,9 @@
-'use client';
-
-import { useGetDishQuery } from '../../redux/services/api-service';
+import { getDishById } from '../../services/get-dish-by-id';
 import { MenuItemCounter } from '../Menu-item-counter/menu-item-counter';
-import { State } from '../State/state';
 import styles from './dish-details.module.scss';
 
-export function DishDetails({ dishId }) {
-    const { data, isLoading, isError } = useGetDishQuery(dishId);
-
-    if (isLoading || isError) {
-        return <State isLoading={isLoading} isError={isError} />
-    }
+export async function DishDetails({ dishId }) {
+    const data = await getDishById(dishId);
 
     if (!data) {
         return null;

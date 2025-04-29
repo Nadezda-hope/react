@@ -1,0 +1,13 @@
+.counter {
+    display: grid;
+    grid-template-columns: 36px 36px;
+    grid-template-rows: 36px 36px;
+    gap: 4px;
+
+    &__input {
+        grid-column: span 2;
+        text-align: center;
+        border: 1px solid #E5E5E5;
+        border-radius: 4px;
+    }
+}

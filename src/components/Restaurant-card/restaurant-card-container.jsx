@@ -1,25 +1,13 @@
-'use client';
-
-import { useGetRestaurantsQuery } from '../../redux/services/api-service';
 import { RestaurantCard } from './restaurant-card';
 
-export function RestaurantCardContainer({ children, id }) {
-    const { data } = useGetRestaurantsQuery(undefined, {
-        selectFromResult: (result) => ({
-            ...result,
-            data: result.data?.find((item) => item.id === id)
-        })
-    });
-
-    if (!data) {
-        return;
-    }
+export async function RestaurantCardContainer({ children, data }) {
+    const { id, name, img } = data;
 
     return (
         <RestaurantCard
             id={id}
-            name={data.name}
-            img={data.img}
+            name={name}
+            img={img}
         >{children}</RestaurantCard>
     );
 }
