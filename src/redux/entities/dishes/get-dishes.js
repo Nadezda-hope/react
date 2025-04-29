@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { selectDishById, selectDishesIds, selectDishesTotal } from './slice';
 
 export const getDishes = createAsyncThunk(
     'dishes/getDishes',

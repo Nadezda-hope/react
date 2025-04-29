@@ -1,3 +1,5 @@
+'use client';
+
 import { UserContext as UserContextProvider } from ".";
 import { useState } from 'react'
 import { mockUser } from '../../../material/mock-user'

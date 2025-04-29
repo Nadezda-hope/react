@@ -1,12 +1,11 @@
-import { useOutletContext } from 'react-router';
+'use client';
+
 import { useGetReviewsByRestaurantIdQuery, useGetUsersQuery } from '../../redux/services/api-service';
 import { ReviewListItem } from '../Review-list-item/review-list-item';
 import { State } from '../State/state';
 import styles from './review-list.module.scss';
 
-export function ReviewList() {
-    const { restaurantId } = useOutletContext();
-
+export function ReviewList({ restaurantId }) {
     const {
         data: reviewData,
         isLoading: isReviewLoading,

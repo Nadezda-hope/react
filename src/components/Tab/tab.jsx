@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 import styles from './tab.module.scss';
-import { NavLink } from 'react-router';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function Tab({ link, title }) {
+    const pathname = usePathname();
     return (
-        <NavLink to={link} className={({ isActive }) => classNames(styles.tab, isActive && styles.isActive)}>
+        <Link href={link} className={classNames(styles.tab, pathname.includes(link) ? styles.isActive : '')}>
             {title}
-        </NavLink>
+        </Link>
     )
 }

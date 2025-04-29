@@ -1,3 +1,5 @@
+'use client';
+
 import { useSelector } from 'react-redux';
 import styles from './basket.module.scss';
 import { selectDishItems } from '../../redux/entities/basket/slice';

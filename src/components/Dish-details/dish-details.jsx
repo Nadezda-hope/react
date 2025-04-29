@@ -1,3 +1,5 @@
+'use client';
+
 import { useGetDishQuery } from '../../redux/services/api-service';
 import { MenuItemCounter } from '../Menu-item-counter/menu-item-counter';
 import { State } from '../State/state';

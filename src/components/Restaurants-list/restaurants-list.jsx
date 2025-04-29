@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames';
 import { use } from 'react';
 import { useGetRestaurantsQuery } from '../../redux/services/api-service';
@@ -5,9 +7,8 @@ import { State } from '../State/state';
 import { Tab } from '../Tab/tab';
 import { ThemeContext } from '../Theme-context';
 import styles from './restaurants-list.module.scss';
-import { Outlet } from 'react-router';
 
-export function RestaurantsList() {
+export function RestaurantsList({ children }) {
     const { data, isLodaing, isError } = useGetRestaurantsQuery();
     const { theme } = use(ThemeContext);
 
@@ -30,14 +31,14 @@ export function RestaurantsList() {
                     data?.map((item) => (
                         <Tab
                             key={item.id}
-                            link={item.id}
+                            link={`/restaurants/${item.id}`}
                             title={item.name}
                         />
                     ))
                 }
             </div>
             <div className={styles.restaurantsList__content}>
-                <Outlet />
+                {children}
             </div>
         </div>
     )

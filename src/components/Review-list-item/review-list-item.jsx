@@ -1,3 +1,5 @@
+'use client';
+
 import { use, useState } from 'react';
 import { useEditReviewMutation, useGetUsersQuery } from '../../redux/services/api-service';
 import { UserContext } from '../User-context';
